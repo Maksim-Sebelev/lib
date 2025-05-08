@@ -125,6 +125,7 @@ void LogTextColor(LogColor color)
         LogTextColorEnd();
         WasUsed = false;
     }
+
     else
     {
         WasUsed = true;
@@ -273,7 +274,7 @@ static void makeBodyBefore(size_t nTabBefore)
 
 
     fprintfNTab(nTabBefore);
-    fprintfBodyBeforeEnd();
+    fprintfBodyBeforeEnd(); fprintfNS();
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -523,6 +524,7 @@ static void makeTextColor(size_t nTabBefore)
     fprintfNTab(nTabBefore);
     fprintfInHtml(".black_text { color: #000000; }");
 
+    fprintfNS();
     fprintfNS();
 }
 

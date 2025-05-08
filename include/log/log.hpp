@@ -3,7 +3,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#include <stdio.h>
+#include <stddef.h>
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -70,9 +70,9 @@ void LogPrint(LogColor color, const char* format, ...);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#define LOG_PLACE(color)                                LogPrint(color, "file [%s]\nline [%d]\nfunc [%s]\n",       __FILE__,       __LINE__,      __func__ )
-#define LOG_PRINT_PLACE(color, file, line, func)        LogPrint(color, "file [%s]\nline [%d]\nfunc [%s]\n",         file  ,         line  ,        func   )
-#define LOG_PRINT_STRUCT_PLACE(color, file, line, func) LogPrint(color, "file [%s]\nline [%d]\nfunc [%s]\n", (place).file  , (place).line  , (place).func  )
+#define LOG_PLACE(color)                                LogPrint(color, "%s:%d\nin '%s'\n",       __FILE__,       __LINE__,      __func__ )
+#define LOG_PRINT_PLACE(color, file, line, func)        LogPrint(color, "%s:%d\nin '%s'\n",         file  ,         line  ,        func   )
+#define LOG_PRINT_STRUCT_PLACE(color, file, line, func) LogPrint(color, "%s:%d\nin '%s'\n", (place).file  , (place).line  , (place).func  )
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <assert.h>
-#include <string.h>
 #include "fileread/fileread.hpp"
-#include "lib/colorPrint.hpp"
+#include "lib/lib.hpp"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -54,13 +53,12 @@ int WordToInt(const Word* word)
 
     if (size_t (strEnd - str) != len)
     {
-        COLOR_PRINT(RED, 
+        EXIT(EXIT_FAILURE, 
             "Trying to convert not 'int' str to 'int'\n"
             "str (word) = '%s'\n"
             "file: %lu:%lu\n",
             str, word->line, word->inLine
         );
-        exit(1);
     }
 
     return (int) res;
@@ -82,13 +80,12 @@ double WordToDouble(const Word* word)
 
     if (size_t (strEnd - str) != len)
     {
-        COLOR_PRINT(RED, 
-            "Trying to convert not 'double` str to 'double'\n"
+        EXIT(EXIT_FAILURE,
+            "Trying to convert not 'double' str to 'double'\n"
             "str (word) = '%s'\n"
             "file: %lu:%lu\n",
             str, word->line, word->inLine
         );
-        exit(1);
     }
 
     return res;
