@@ -2,19 +2,20 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <assert.h>
+#include <time.h>
 #include "log/log.hpp"
 #include "lib/lib.hpp"
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-ON_IMG(
-const char* background_image = "../include/log/backgrounds/anime_tyan.webp";
-)
-    
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
-FILE*       LogFile = nullptr;
 const char* LogName = "Log/log.html";
+FILE*       LogFile = nullptr;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ON_IMG(
+const char* background_image = "../src/log/backgrounds/anime_tyan_2.webp";
+)
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -79,6 +80,7 @@ static void makeColor                (                        size_t nTabBefore)
 static void makeColorP               (                        size_t nTabBefore);
 static void makeH1                   (                        size_t nTabBefore);
 // static void makeH2                   (                        size_t nTabBefore);
+static void LogDate                  (                        size_t nTabBefore);
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,6 +103,11 @@ void OpenLog()
     makeStyle(ON_IMG(background_image,) 1);
 
     makeTextClass(0);
+    
+    LogPrint(White, "begin:\n");
+    LogDate(3);
+
+    LogPrint(White, "\n");
 
     return;
 }
@@ -109,6 +116,12 @@ void OpenLog()
 
 void CloseLog()
 {
+    assert(LogFile);
+
+    LogPrint(White, "\n");
+    LogPrint(White, "end:\n");
+    LogDate(3);
+
     fclose(LogFile);
     LogFile = nullptr;
 
@@ -130,7 +143,7 @@ void LogTextColor(LogColor color)
     {
         WasUsed = true;
     }
-    
+
     const char* color_html = GetHtmlColor(color);
 
     fprintfNTab(3);
@@ -183,6 +196,33 @@ void LogPrint(LogColor color, const char* format, ...)
     
     fprintfNTab(3);
     fprintfSpanEnd(); fprintfNS();
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+static void LogDate(size_t nTabBefore)
+{
+    assert(LogFile);
+    assert(LogName);
+
+    time_t raw_time;
+    struct tm *time_info;
+    static const size_t date_len = 64;
+    char date[date_len] = {};
+
+    time(&raw_time);
+    time_info = localtime(&raw_time);
+    strftime(date, date_len, "%H:%M:%S %Y-%m-%d ", time_info);
+
+    fprintfNTab(nTabBefore);
+        fprintfSpanWithArgs("class=\"white_text\""); fprintfNS();
+    
+        fprintfNTab(nTabBefore + 1);
+            fprintfPtext(); fprintfInHtml("%s", date);  fprintfPtextEnd(); fprintfNS();
+
+    fprintfNTab(nTabBefore);
+        fprintfSpanEnd(); fprintfNS();
+    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -267,7 +307,7 @@ static void makeBodyBefore(size_t nTabBefore)
         fprintfInHtml("background: rgba(0, 0, 0, 0.5);\n");
 
     fprintfNTab(nTabBefore + 1);
-        fprintfInHtml("z-index: -1;");
+        fprintfInHtml("z-index: -1;\n");
 
     fprintfNTab(nTabBefore + 1);
         fprintfInHtml("pointer-events: none;\n");
