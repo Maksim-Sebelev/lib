@@ -7,7 +7,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#define _IMG_BACKGROUND  // if you want to see your image on background
+// #define _IMG_BACKGROUND  // if you want to see your image on background
 
 #ifdef _IMG_BACKGROUND
     #define ON_IMG(...) __VA_ARGS__
@@ -20,7 +20,7 @@
     #define ON_IMG(...)
     #define OFF_IMG(...) __VA_ARGS__
 
-    #define _GRADIENT  // if you want to see color gradient on background
+    // #define _GRADIENT  // if you want to see color gradient on background
  
     #ifdef _GRADIENT
         #define ON_GRADIENT(...) __VA_ARGS__
@@ -54,7 +54,7 @@ void CloseLog();
 void LogAdcPrint(const char* format, ...);
 void LogTextColor(LogColor color);
 void LogTextColorEnd();
-
+void LogTitle(LogColor color, const char* title);
 void LogPrint(LogColor color, const char* format, ...);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,9 +64,10 @@ void LogPrint(LogColor color, const char* format, ...);
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#define LOG_COLOR(color)      LogTextColor (color)
-#define LOG_ADC_PRINT(...)    LogAdcPrint  (       __VA_ARGS__)
-#define LOG_PRINT(color, ...) LogPrint     (color, __VA_ARGS__)
+#define LOG_COLOR(color)        LogTextColor (color)
+#define LOG_ADC_PRINT(...)      LogAdcPrint  (       __VA_ARGS__)
+#define LOG_PRINT(color, ...)   LogPrint     (color, __VA_ARGS__)
+#define LOG_TITLE(color, title) LogTitle(color, title)
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

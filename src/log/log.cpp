@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h> // for LogTitle only
 #include <assert.h>
 #include <time.h>
 #include "log/log.hpp"
@@ -14,7 +15,7 @@ FILE*       LogFile = nullptr;
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ON_IMG(
-const char* background_image = "../src/log/backgrounds/anime_tyan_2.webp";
+const char* background_image = "../src/log/backgrounds/anime_tyan_1.webp";
 )
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,8 +46,8 @@ static void fprintfTextSection              ();
 static void fprintfTextSectionEnd           ();
 static void fprintfH1                       ();
 static void fprintfH1End                    ();
-// static void fprintfH2                       ();
-// static void fprintfH2End                    ();
+static void fprintfH2                       ();
+static void fprintfH2End                    ();
 static void fprintfP                        ();
 static void fprintfPEnd                     ();
 static void fprintfPtext                    ();
@@ -79,7 +80,7 @@ static void makeP                    (                        size_t nTabBefore)
 static void makeColor                (                        size_t nTabBefore);
 static void makeColorP               (                        size_t nTabBefore);
 static void makeH1                   (                        size_t nTabBefore);
-// static void makeH2                   (                        size_t nTabBefore);
+static void makeH2                   (                        size_t nTabBefore);
 static void LogDate                  (                        size_t nTabBefore);
 
 
@@ -104,7 +105,6 @@ void OpenLog()
 
     makeTextClass(0);
     
-    LogPrint(White, "begin:\n");
     LogDate(3);
 
     LogPrint(White, "\n");
@@ -118,8 +118,6 @@ void CloseLog()
 {
     assert(LogFile);
 
-    LogPrint(White, "\n");
-    LogPrint(White, "end:\n");
     LogDate(3);
 
     fclose(LogFile);
@@ -171,9 +169,9 @@ void LogAdcPrint(const char* format, ...)
     fprintfNTab(4); fprintfPtext(); vfprintf(LogFile, format, args); fprintfPtextEnd(); fprintfNS();
 
     fflush(LogFile);
-    
+
     va_end(args);
-    
+
     return;
 }
 
@@ -181,21 +179,66 @@ void LogAdcPrint(const char* format, ...)
 
 void LogPrint(LogColor color, const char* format, ...)
 {
+    assert(LogFile);
+    assert(format);
+
     va_list args;
     va_start(args, format);
     
     const char* color_html = GetHtmlColor(color);
     fprintfNTab(3);
     fprintfSpanWithArgs("class=\"color %s\"", color_html); fprintfNS();
-    
+
     fprintfNTab(4); fprintfPtext(); vfprintf(LogFile, format, args); fprintfPtextEnd(); fprintfNS();
     
     fflush(LogFile);
-    
+
     va_end(args);
-    
+
     fprintfNTab(3);
     fprintfSpanEnd(); fprintfNS();
+
+    return;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void LogTitle(LogColor color, const char* title)
+{
+    assert(LogFile);
+    assert(title);
+
+    static const size_t ScreenSize = 45; //count in char's, that size is like h2
+    size_t title_len = strlen(title) + 2;
+
+    size_t free_place_len = 0;
+    if (title_len < ScreenSize - 2) free_place_len = (ScreenSize - (title_len + 2)) / 2;
+
+    if (free_place_len > 0 && (ScreenSize - title_len) % 2 == 0) --free_place_len;
+
+    COLOR_PRINT(RED, "title = %lu\nfree_place_len = %lu\n\n", title_len, free_place_len);
+
+    LogTextColor(color);
+
+    fprintfNTab(3);
+    fprintfH2();
+
+    for (size_t i = 0; i < free_place_len; i++)
+        fprintfInHtml("=");
+
+    fprintfInHtml(" ");
+    fprintfInHtml(title);
+    fprintfInHtml(" ");
+
+    for (size_t i = 0; i < free_place_len; i++)
+        fprintfInHtml("=");
+
+    
+    fprintfH2End(); fprintfNS();
+
+    LogTextColorEnd();
+
+    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -212,16 +255,11 @@ static void LogDate(size_t nTabBefore)
 
     time(&raw_time);
     time_info = localtime(&raw_time);
-    strftime(date, date_len, "%H:%M:%S %Y-%m-%d ", time_info);
+    strftime(date, date_len, "%H:%M:%S %Y-%m-%d", time_info);
 
-    fprintfNTab(nTabBefore);
-        fprintfSpanWithArgs("class=\"white_text\""); fprintfNS();
-    
         fprintfNTab(nTabBefore + 1);
-            fprintfPtext(); fprintfInHtml("%s", date);  fprintfPtextEnd(); fprintfNS();
+            LogTitle(White, date);
 
-    fprintfNTab(nTabBefore);
-        fprintfSpanEnd(); fprintfNS();
     return;
 }
 
@@ -252,6 +290,7 @@ static void makeStyle(ON_IMG(const char* wayToImage,) size_t nTabBefore)
     )
             makeTextSection         (nTabBefore + 2);
             makeH1                  (nTabBefore + 2);
+            makeH2                  (nTabBefore + 2);
             makeP                   (nTabBefore + 2);
             makeColor               (nTabBefore + 2);
             makeColorP              (nTabBefore + 2);
@@ -341,7 +380,7 @@ static void makeBackGround(size_t nTabBefore)
         
         ON_GRADIENT
         (
-            fprintfInHtml("background: linear-gradient(135deg, #000000, #000000, #6600ff, #0de612, #0de612);\n");
+            fprintfInHtml("background: linear-gradient(135deg, #000000, #000000, #6600ff, #6600ff);\n");
             // fprintfInHtml("background: linear-gradient(135deg, #ffffff, #ffffff, #ffffff, #0644f6, #0644f6, #0644f6, #ea2b0b, #ea2b0b, #ea2b0b);\n");
         )
         OFF_GRADIENT
@@ -391,7 +430,6 @@ static void makeBackGroundGradient(size_t nTabBefore)
         fprintfNTab(nTabBefore + 1);
             fprintfCloseBracket(); fprintfNS();
 
-
         fprintfNTab(nTabBefore + 1);
             fprintfInHtml("50%% {\n");
 
@@ -400,7 +438,6 @@ static void makeBackGroundGradient(size_t nTabBefore)
 
         fprintfNTab(nTabBefore + 1);
                 fprintfCloseBracket(); fprintfNS();
-
 
         fprintfNTab(nTabBefore + 1);
             fprintfInHtml("100%% {\n");
@@ -508,19 +545,19 @@ static void makeH1(size_t nTabBefore)
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// static void makeH2(size_t nTabBefore)
-// {
-//     fprintfNTab(nTabBefore);
-//     fprintfH2(); fprintfNS();
+static void makeH2(size_t nTabBefore)
+{
+    fprintfNTab(nTabBefore);
+    fprintfInHtml("h2 {"); fprintfNS();
     
-//     fprintfNTab(nTabBefore + 1); 
-//         fprintfInHtml("text-align: center;\n");
-//     fprintfNTab(nTabBefore + 1); 
-//         fprintfInHtml("margin-bottom: 5px;\n");
+    // fprintfNTab(nTabBefore + 1); 
+        // fprintfInHtml("text-align: center;\n");
+    fprintfNTab(nTabBefore + 1); 
+        fprintfInHtml("margin-bottom: 5px;\n");
 
-//     fprintfNTab(nTabBefore);
-//     fprintfH2End(); fprintfNNS(2);
-// }
+    fprintfNTab(nTabBefore);
+    fprintfInHtml("}"); fprintfNNS(2);
+}
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -618,6 +655,8 @@ static void makeColorP(size_t nTabBefore)
 
     fprintfNTab(nTabBefore);
     fprintfInHtml("}"); fprintfNNS(2);
+
+    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -631,6 +670,8 @@ static void fprintfInHtml(const char* format, ...)
     fflush(LogFile);
 
     va_end(args);
+
+    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -844,19 +885,19 @@ static void fprintfH1End()
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// static void fprintfH2()
-// {
-//     fprintfInHtml("h2 {");
-// }
-
-// //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// static void fprintfH2End()
-// {
-//     fprintfInHtml("}");
-// }
+static void fprintfH2()
+{
+    fprintfInHtml("<h2>");
+}
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+static void fprintfH2End()
+{
+    fprintfInHtml("</h2>");
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 static void fprintfP()
 {
