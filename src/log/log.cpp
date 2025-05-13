@@ -216,8 +216,6 @@ void LogTitle(LogColor color, const char* title)
 
     if (free_place_len > 0 && (ScreenSize - title_len) % 2 == 0) --free_place_len;
 
-    COLOR_PRINT(RED, "title = %lu\nfree_place_len = %lu\n\n", title_len, free_place_len);
-
     LogTextColor(color);
 
     fprintfNTab(3);
