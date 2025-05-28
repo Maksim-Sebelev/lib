@@ -8,7 +8,7 @@ bin/
 build/
 
 # log file dir
-# log/
+log/
 
 # here main needed only for lib-functions test
 main.cpp
