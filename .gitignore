@@ -1,0 +1,14 @@
+# my vscode settings
+.vscode/
+
+# binary (objects) files dir
+bin/
+
+# executable file dir
+build/
+
+# log file dir
+Log/
+
+# here main needed only for lib-functions test
+main.cpp

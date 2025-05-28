@@ -91,7 +91,7 @@ void OpenLog()
     assert(LogName && "logName = nullptr");
 
     int sys_return = system("mkdir -p Log/");
-    
+
     if (sys_return != 0)
         EXIT(EXIT_FAILURE, "failed create log dir.");
 
