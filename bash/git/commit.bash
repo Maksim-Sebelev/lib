@@ -1,7 +1,7 @@
 #!/bin/bash/
 
 if [ "$#" -eq 0 ]; then
-    commit="ZoV"
+    commit=ZoV
 elif [ "$#" -eq 1 ]; then
     commit=$1
 else
