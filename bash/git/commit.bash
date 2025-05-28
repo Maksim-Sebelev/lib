@@ -1,5 +1,7 @@
 #!/bin/bash/
 
+# argument = commit name
+
 if [ "$#" -eq 0 ]; then
     commit=ZoV
 elif [ "$#" -eq 1 ]; then
