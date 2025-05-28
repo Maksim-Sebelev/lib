@@ -10,8 +10,6 @@ else
     exit 0
 fi
 
-echo "commmit = '$commit'"
-
 git pull origin main
 git add --all
 git commit -m "$commit"
