@@ -9,13 +9,43 @@
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-const char* LogName = "log/log.html";
+#define _IMG_BACKGROUND  // if you want to see your image on background
+
+#ifdef _IMG_BACKGROUND
+    #define ON_IMG(...) __VA_ARGS__
+    #define OFF_IMG(...)
+
+    #define ON_GRADIENT(...) 
+    #define OFF_GRADIENT(...)
+
+#else
+    #define ON_IMG(...)
+    #define OFF_IMG(...) __VA_ARGS__
+
+    // #define _GRADIENT  // if you want to see color gradient on background
+ 
+    #ifdef _GRADIENT
+        #define ON_GRADIENT(...) __VA_ARGS__
+        #define OFF_GRADIENT(...)
+        
+    #else
+        #define ON_GRADIENT(...)
+        #define OFF_GRADIENT(...) __VA_ARGS__
+
+    #endif
+    
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const char* LogDir  = "log/";
+const char* LogName = "log.html";
 FILE*       LogFile = nullptr;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ON_IMG(
-const char* background_image = "../src/log/backgrounds/anime_tyan_1.webp";
+const char* background_image = "../src/log/backgrounds/anime_tyan_2.webp";
 )
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -89,15 +119,22 @@ static void LogDate                  (                        size_t nTabBefore)
 void OpenLog()
 {
     assert(LogName && "logName = nullptr");
+    assert(LogDir  && "logDir = nullptr");
 
-    int sys_return = system("mkdir -p log/");
+    static const size_t buffer_size = 256;
+    char command[buffer_size] = {};
+    snprintf(command, buffer_size, "mkdir -p %s", LogDir);
+    int sys_return = system(command);
+
+    char full_log_path[buffer_size] = {};
+    snprintf(full_log_path, buffer_size, "%s%s", LogDir, LogName);
 
     if (sys_return != 0)
         EXIT(EXIT_FAILURE, "failed create log dir.");
 
-    LogFile = fopen(LogName, "w");
+    LogFile = fopen(full_log_path, "w");
     if (!LogFile)
-        EXIT(EXIT_FAILURE, "failed open log file: '%s'\n", LogName);
+        EXIT(EXIT_FAILURE, "failed open log file: '%s'\n", full_log_path);
 
     fprintfHtml(); fprintfNS();
 
@@ -244,7 +281,6 @@ void LogTitle(LogColor color, const char* title)
 static void LogDate(size_t nTabBefore)
 {
     assert(LogFile);
-    assert(LogName);
 
     time_t raw_time;
     struct tm *time_info;

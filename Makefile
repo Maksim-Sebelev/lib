@@ -43,8 +43,9 @@ EXECUTABLE 	   ?= lib
 
 override CFLAGS += $(COMMONINC)
 
-CSRC =  main.cpp                  \
-
+CSRC =  main.cpp                 \
+		src/lib/lib.cpp           \
+		src/fileread/fileread.cpp  \
 
 ifeq ($(BUILD_TYPE), debug)
 	CSRC += src/log/log.cpp
@@ -94,7 +95,7 @@ clean_dirs:
 	rm -rf $(OUT_O_DIR) $(EXECUTABLE_DIR)
 
 clean_log:
-	rm -rf ../Log/
+	rm -rf log/
 
 
 #===== dependens =======================================
