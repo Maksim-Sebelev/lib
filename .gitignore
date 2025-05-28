@@ -12,3 +12,7 @@ Log/
 
 # here main needed only for lib-functions test
 main.cpp
+
+
+# struct of project file
+# project_struct/

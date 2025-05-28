@@ -1,6 +1,5 @@
 #!/bin/bash/
 
-mkdir -p assets
-mkdir -p assets/project_struct
+mkdir -p project_struct/
 
-tree -I 'bash|bin|build|dot|Log' >> assets/project_struct/project_struct.txt 
+tree -I 'bash|bin|build|dot|Log' > project_struct/project_struct.txt 

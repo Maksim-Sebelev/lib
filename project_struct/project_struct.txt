@@ -1,0 +1,29 @@
+.
+├── assets
+│   └── project_struct
+│       └── project_struct.txt
+├── include
+│   ├── fileread
+│   │   └── fileread.hpp
+│   ├── lib
+│   │   └── lib.hpp
+│   └── log
+│       └── log.hpp
+├── main.cpp
+├── Makefile
+├── project_struct
+│   └── project_struct.txt
+└── src
+    ├── fileread
+    │   └── fileread.cpp
+    ├── lib
+    │   └── lib.cpp
+    └── log
+        ├── backgrounds
+        │   ├── anime_tyan_1.webp
+        │   ├── anime_tyan_2.webp
+        │   ├── anime_tyan_3.png
+        │   └── anime_tyan_main.jpg
+        └── log.cpp
+
+13 directories, 14 files
