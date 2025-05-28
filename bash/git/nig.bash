@@ -7,8 +7,8 @@ red_concole_color="\x1b[31m"
 console_color_reset="\x1b[0m"
 
 if [ "$#" -eq 0 ]; then
-    echo -e $red_concole_color"no arguments."
-    echo -e "expected files and/or directories.$console_color_reset"
+    echo -e $red_concole_color"No arguments."
+    echo -e "Expected files and/or directories.$console_color_reset"
     exit 0
 fi
 

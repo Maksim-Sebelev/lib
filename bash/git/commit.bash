@@ -5,8 +5,8 @@ if [ "$#" -eq 0 ]; then
 elif [ "$#" -eq 1 ]; then
     commit=$1
 else
-    echo "too many arguments."
-    echo "expected only commit name."
+    echo "Too many arguments."
+    echo "Expected only commit name."
     exit 0
 fi
 
