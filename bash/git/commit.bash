@@ -16,4 +16,3 @@ git pull origin main
 git add --all
 git commit -m "$commit"
 git push --all
-
