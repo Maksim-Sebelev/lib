@@ -3,7 +3,7 @@
 if [ "$#" -eq 0 ]; then
     commit="ZoV"
 elif [ "$#" -eq 1 ]; then
-    commit=\"$1\"
+    commit=$1
 else
     echo "Too many arguments."
     echo "Expected only commit name."
@@ -14,5 +14,5 @@ echo "commmit = '$commit'"
 
 git pull origin main
 git add --all
-git commit -m $commit
+git commit -m "$commit"
 git push --all
