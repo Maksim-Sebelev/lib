@@ -16,14 +16,14 @@ fi
 
 for arg in "$@"; do
     if [ -f "$arg" ]; then
-        cp $arg $copy_dir/
+        cp $arg $copy_dir/ &> /dev/null
     elif [ -d "$arg" ]; then
         if [ "$arg" == "." ]; then
             now_dir=$(basename "$(pwd)")
             mkdir -p $copy_dir/$now_dir
-            cp -r $arg $copy_dir/$now_dir/
+            cp -r $arg $copy_dir/$now_dir/ &> /dev/null
         else
-            cp -r $arg $copy_dir/
+            cp -r $arg $copy_dir/ &> /dev/null
         fi
     else
         echo "$arg - doesn't exists"
