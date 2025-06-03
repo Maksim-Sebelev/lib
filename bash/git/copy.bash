@@ -23,16 +23,34 @@ if [ "$1" == "clean" ]; then
 fi
 
 for arg in "$@"; do
+
+    finally_copy_dir=$copy_dir
+    finally_arg=$arg
+
     if [ -f "$arg" ]; then
-        cp $arg $copy_dir/ &> /dev/null
+        cp $finally_arg $finally_copy_dir/ &> /dev/null
     elif [ -d "$arg" ]; then
         if [ "$arg" == "." ]; then
             now_dir=$(basename "$(pwd)")
-            mkdir -p $copy_dir/$now_dir
-            cp -r $arg $copy_dir/$now_dir/ &> /dev/null
-        else
-            cp -r $arg $copy_dir/ &> /dev/null
+            finally_arg=$now_dir
+            finally_copy_dir=$copy_dir/$finally_arg
         fi
+        
+
+        while [ -d "$finally_copy_dir/" ]; do
+            finally_copy_dir=$finally_copy_dir".2"
+    
+            if [[ ! -d "$finally_copy_dir/$finally_arg" ]]; then
+                mkdir -p $finally_copy_dir/
+                break
+            fi
+
+            echo "'$finally_copy_dir/$finally_arg' already exists in .copys/."
+            echo "will be made '$finally_copy_dir/$finally_arg'"
+        done
+
+        mkdir -p $finally_copy_dir
+        cp -r $arg $finally_copy_dir/ &> /dev/null
     else
         echo "$arg - doesn't exists"
     fi
