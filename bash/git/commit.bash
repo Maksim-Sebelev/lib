@@ -12,7 +12,19 @@ else
     exit 0
 fi
 
+copy_bash=bash/git/copy.bash
+
+if [[ ! -f "$copy_bash" ]]; then
+    echo "$copy_bash - doesn't exist"
+    exit 1;
+fi
+
 bash bash/git/copy.bash .
+
+if [ "$?" != "0" ]; then
+    echo "Failed made copy of this repository!"
+    exit 1;
+fi
 
 git pull origin main
 git add --all

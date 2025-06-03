@@ -1,6 +1,14 @@
+#!/bin/bash
+
+# arguments = dirs or files for copy in dir .copys
+# exit codes
+# 0 - success
+# 1 - no arguments
+# 
+
 if [ "$#" -eq 0 ]; then
     echo "Expected arguments."
-    exit 0;
+    exit 1;
 fi
 
 copy_dir=../.copys
