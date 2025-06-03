@@ -12,6 +12,8 @@ else
     exit 0
 fi
 
+bash bash/git/copy.bash .
+
 git pull origin main
 git add --all
 git commit -m "$commit"

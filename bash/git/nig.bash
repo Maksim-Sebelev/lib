@@ -17,7 +17,7 @@ fi
 
 for arg in "$@"; do
 
-    if [ -f $arg ]; then
+    if [ -f "$arg" ]; then
 
         if git ls-files --cached --error-unmatch "$arg" >/dev/null 2>&1; then
             echo -e $green_console_color"removing file: '$arg'"$console_color_reset
