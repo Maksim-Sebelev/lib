@@ -35,22 +35,27 @@ for arg in "$@"; do
             finally_arg=$now_dir
             finally_copy_dir=$copy_dir/$finally_arg
         fi
-        
 
-        while [ -d "$finally_copy_dir/" ]; do
-            finally_copy_dir=$finally_copy_dir".2"
-    
-            if [[ ! -d "$finally_copy_dir/$finally_arg" ]]; then
-                mkdir -p $finally_copy_dir/
-                break
-            fi
+        if [ -d "$finally_copy_dir/$finally_arg" ]; then
+            attempt=1
+            while true; do
+                new_dir="$copy_dir/${finally_arg}.$attempt"
+                if [ ! -d "$new_dir" ]; then
+                    finally_copy_dir="$new_dir"
+                    break
+                fi
+                ((attempt++))
+                
+                # Защита от бесконечного цикла (на всякий случай)
+                if [ $attempt -gt 100 ]; then
+                    echo "Error: Too many duplicate directories exist for $finally_arg"
+                    exit 1
+                fi
+            done
+        fi
 
-            echo "'$finally_copy_dir/$finally_arg' already exists in .copys/."
-            echo "will be made '$finally_copy_dir/$finally_arg'"
-        done
-
-        mkdir -p $finally_copy_dir
-        cp -r $arg $finally_copy_dir/ &> /dev/null
+        mkdir -p "$finally_copy_dir"
+        cp -r "$arg" "$finally_copy_dir"/ &> /dev/null
     else
         echo "$arg - doesn't exists"
     fi
