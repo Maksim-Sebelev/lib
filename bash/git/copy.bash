@@ -28,7 +28,8 @@ for arg in "$@"; do
     finally_arg=$arg
 
     if [ -f "$arg" ]; then
-        cp $finally_arg $finally_copy_dir/ &> /dev/null
+        cp $finally_arg $finally_copy_dir/  &> /dev/null
+
     elif [ -d "$arg" ]; then
         if [ "$arg" == "." ]; then
             now_dir=$(basename "$(pwd)")
@@ -36,7 +37,7 @@ for arg in "$@"; do
             finally_copy_dir=$copy_dir/$finally_arg
         fi
 
-        if [ -d "$finally_copy_dir/$finally_arg" ]; then
+        if [ -d "$finally_copy_dir/" ]; then
             attempt=1
             while true; do
                 new_dir="$copy_dir/${finally_arg}.$attempt"
@@ -46,7 +47,6 @@ for arg in "$@"; do
                 fi
                 ((attempt++))
                 
-                # Защита от бесконечного цикла (на всякий случай)
                 if [ $attempt -gt 100 ]; then
                     echo "Error: Too many duplicate directories exist for $finally_arg"
                     exit 1
@@ -55,8 +55,11 @@ for arg in "$@"; do
         fi
 
         mkdir -p "$finally_copy_dir"
-        cp -r "$arg" "$finally_copy_dir"/ &> /dev/null
+        cp -r "$arg" "$finally_copy_dir"/  &> /dev/null
     else
         echo "$arg - doesn't exists"
     fi
+
 done
+
+exit 0
