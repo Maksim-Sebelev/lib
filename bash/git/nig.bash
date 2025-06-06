@@ -10,14 +10,12 @@ yellow_console_color="\e[0;33m"
 console_color_reset="\x1b[0m"
 
 if [ ! "$#" -eq 0 ]; then
-    echo -e $red_concole_color"No arguments expected."
+    echo -e ${red_concole_color}"No arguments expected."${console_color_reset}
     exit 1
 fi
 
 remove()
 {
-
-    echo "arg = '$1'"
     if [ "$#" != "2" ]; then
         echo ${red_concole_color}"bad 'remove()' args: '$@'"${console_color_reset}
         exit 2
@@ -52,6 +50,8 @@ remove()
 
 
 git ls-files --others --ignored --exclude-standard | while read -r arg; do
+
+    echo "arg = '${arg}'"
 
     if [ -f "${arg}" ]; then
         remove "${arg}" "-f"
