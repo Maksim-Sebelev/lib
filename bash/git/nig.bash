@@ -42,7 +42,7 @@ remove()
     if git ls-files --cached --error-unmatch "${arg}" >/dev/null 2>&1; then
         printf "${green_console_color}removing ${msg}:\n%-30s %s\n${console_color_reset}" "${arg}" 
         git rm --cached ${r_flag} "$arg"
-
+        echo "AAAAAAAA"
     # else
     #     printf "${green_console_color}'${arg}'\n%-10s - already removed from git\n\n.${console_color_reset}"
     fi
