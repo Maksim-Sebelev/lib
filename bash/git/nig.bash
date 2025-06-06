@@ -44,9 +44,7 @@ remove()
         git rm --cached ${r_flag} "$arg"
 
     else
-        printf "${green_console_color}"
-        echo -e ${green_console_color}"'${arg}' already removed from git."${console_color_reset}
-        echo ""
+        printf "${green_console_color}'${arg}' - already removed from git\n.${console_color_reset}"
     fi
 }
 
