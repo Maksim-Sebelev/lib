@@ -26,7 +26,7 @@ remove()
     msg=""
 
     if [ "$2" == "-f" ]; then
-        r_flag=""
+        r_flag="-r"
         msg="file"
 
     elif [ "$2" == "-d" ]; then
@@ -51,6 +51,8 @@ remove()
 
 git ls-files --others --ignored --exclude-standard | while read -r arg; do
     echo "arg = '${arg}'"
+
+    arg="tmp/"
 
     if [ -f "${arg}" ]; then
         remove "${arg}" "-f"
