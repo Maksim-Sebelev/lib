@@ -1,0 +1,11 @@
+# MY bash funtions
+
+# 1.
+# name: bash_cd
+# args: 1 arg, path to directory
+# made "cd" from bash file
+
+bash_cd() {
+    arg1=$1
+    cd "$arg1"
+}
