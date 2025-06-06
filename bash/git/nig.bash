@@ -39,7 +39,7 @@ remove()
 
     fi
 
-    if git ls-files --cached --error-unmatch "$arg" >/dev/null 2>&1; then
+    if git ls-files --cached --error-unmatch "${arg}" >/dev/null 2>&1; then
         printf "${green_console_color}removing ${msg}:\n%-30s %s\n${console_color_reset}" "${arg}" 
         git rm --cached ${r_flag} "$arg"
 
@@ -50,7 +50,6 @@ remove()
 
 
 git ls-files --others --ignored --exclude-standard | while read -r arg; do
-
     echo "arg = '${arg}'"
 
     if [ -f "${arg}" ]; then
