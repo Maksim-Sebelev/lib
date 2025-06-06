@@ -52,8 +52,6 @@ remove()
 git ls-files --others --ignored --exclude-standard | while read -r arg; do
     echo "arg = '${arg}'"
 
-    arg="tmp/"
-
     if [ -f "${arg}" ]; then
         remove "${arg}" "-f"
 
