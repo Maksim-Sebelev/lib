@@ -16,6 +16,8 @@ fi
 
 remove()
 {
+
+    echo "arg = '$1'"
     if [ "$#" != "2" ]; then
         echo ${red_concole_color}"bad 'remove()' args: '$@'"${console_color_reset}
         exit 2
@@ -43,8 +45,8 @@ remove()
         printf "${green_console_color}removing ${msg}:\n%-30s %s\n${console_color_reset}" "${arg}" 
         git rm --cached ${r_flag} "$arg"
 
-    else
-        printf "${green_console_color}'${arg}'\n%-10s - already removed from git\n\n.${console_color_reset}"
+    # else
+    #     printf "${green_console_color}'${arg}'\n%-10s - already removed from git\n\n.${console_color_reset}"
     fi
 }
 
