@@ -35,7 +35,7 @@ if [[ ! -f "${nig_bash}" ]]; then
     exit 1;
 fi
 
-bash ${nig_bash}
+# bash ${nig_bash}
 
 if [ "$?" != "0" ]; then
     echo "Failed made nig!"
