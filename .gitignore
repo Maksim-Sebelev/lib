@@ -13,8 +13,9 @@ log/
 # here main needed only for lib-functions test
 main.cpp
 
+# my tmp file
+tmp.txt
+
 # struct of project file
 project_struct/
 
-
-tmp.txt
