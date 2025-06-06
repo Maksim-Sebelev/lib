@@ -15,7 +15,7 @@ if [ "$#" -eq 0 ]; then
     exit 0
 fi
 
-for arg in "$@"; do
+git ls-files --others --ignored --exclude-standard | while read -r $arg; do
 
     if [ -f "$arg" ]; then
 
