@@ -9,35 +9,54 @@ green_console_color="\x1b[32m"
 yellow_console_color="\e[0;33m"
 console_color_reset="\x1b[0m"
 
-if [ "$#" -eq 0 ]; then
-    echo -e $red_concole_color"No arguments."
-    echo -e "Expected files and/or directories.$console_color_reset"
-    exit 0
+if [ ! "$#" -eq 0 ]; then
+    echo -e $red_concole_color"No arguments expected."
+    exit 1
 fi
 
-git ls-files --others --ignored --exclude-standard | while read -r $arg; do
+remove()
+{
+    if [ "$#" != "1" ]; then
+        echo ${red_concole_color}"bad 'remove()' args: '$@'"${console_color_reset}
+        exit 2
+    fi
+    
+    r_flag=""
+    msg=""
+
+    if [ "$1" == "-f" ]; then
+        r_flag=""
+        msg="file"
+
+    elif [ "$1" == "-d" ]; then
+        r_flag="-r"
+        msg="direcory"
+
+    else
+        echo ${red_concole_color}"bad 'remove()' args: '$@'"${console_color_reset}
+        exit 1
+    
+    fi
+
+    if git ls-files --cached --error-unmatch "$arg" >/dev/null 2>&1; then
+        printf "${green_console_color}removing ${msg}: %-30s %s\n${console_color_reset}" "$arg" 
+        git rm --cached ${r_flag} "$arg"
+
+    else
+        printf "${green_console_color}"
+        echo -e $green_console_color"'$arg' already removed from git."$console_color_reset
+        echo ""
+    fi
+}
+
+
+git ls-files --others --ignored --exclude-standard | while read -r arg; do
 
     if [ -f "$arg" ]; then
-
-        if git ls-files --cached --error-unmatch "$arg" >/dev/null 2>&1; then
-            echo -e $green_console_color"removing file: '$arg'"$console_color_reset
-            git rm --cached "$arg"
-
-        else
-            echo -e $green_console_color"'$arg' already removed from repository or doesn't marked in .gitignore."$console_color_reset
-
-        fi
+        remove "-f"
 
     elif [ -d "$arg" ]; then
-
-        if git ls-files --cached --error-unmatch "$arg" >/dev/null 2>&1; then
-            echo -e $green_console_color"removing file: '$arg'"$console_color_reset
-            git rm --cached -r "$arg"
-
-        else
-            echo -e $green_console_color"'$arg' already removed from repository or doesn't marked in .gitignore."$console_color_reset
-
-        fi
+        remove "-d"
 
     else
         echo -e "$red_concole_color'$arg' doesn't exist.$console_color_reset"
