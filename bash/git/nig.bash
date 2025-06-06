@@ -36,15 +36,15 @@ remove()
     else
         echo ${red_concole_color}"bad 'remove()' args: '$@'"${console_color_reset}
         exit 1
-    
+
     fi
 
     if git ls-files --cached --error-unmatch "$arg" >/dev/null 2>&1; then
-        printf "${green_console_color}removing ${msg}: %-30s %s\n${console_color_reset}" "${arg}" 
+        printf "${green_console_color}removing ${msg}:\n%-30s %s\n${console_color_reset}" "${arg}" 
         git rm --cached ${r_flag} "$arg"
 
     else
-        printf "${green_console_color}'${arg}' %-30s - already removed from git\n.${console_color_reset}"
+        printf "${green_console_color}'${arg}'\n%-30s - already removed from git\n.${console_color_reset}"
     fi
 }
 
