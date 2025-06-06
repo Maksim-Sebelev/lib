@@ -14,20 +14,35 @@ fi
 
 copy_bash=bash/git/copy.bash
 
-if [[ ! -f "$copy_bash" ]]; then
-    echo "$copy_bash - doesn't exist."
+if [[ ! -f "${copy_bash}" ]]; then
+    echo "${copy_bash} - doesn't exist."
     echo "Failed made copy of this repository!"
     exit 1;
 fi
 
-bash $copy_bash .
+bash ${copy_bash} .
 
 if [ "$?" != "0" ]; then
     echo "Failed made copy of this repository!"
     exit 1;
 fi
 
+nig_bash=bash/git/nig.bash
+
+if [[ ! -f "${nig_bash}" ]]; then
+    echo "${nig_bash} - doesn't exist."
+    echo "Failed made nig!"
+    exit 1;
+fi
+
+bash ${nig_bash}
+
+if [ "$?" != "0" ]; then
+    echo "Failed made nig!"
+    exit 1;
+fi
+
 git pull origin main
 git add --all
-git commit -m "$commit"
+git commit -m "${commit}"
 git push --all
