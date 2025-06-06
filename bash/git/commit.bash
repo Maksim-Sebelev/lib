@@ -27,23 +27,8 @@ if [ "$?" != "0" ]; then
     exit 1;
 fi
 
-# nig_bash=bash/git/nig.bash
 
-# if [[ ! -f "${nig_bash}" ]]; then
-#     echo "${nig_bash} - doesn't exist."
-#     echo "Failed made nig!"
-#     exit 1;
-# fi
-
-# bash ${nig_bash}
-
-git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached
-
-# if [ "$?" != "0" ]; then
-#     echo "Failed made nig!"
-#     exit 1;
-# fi
-
+git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached # remove .gitignore files, if they on git
 git pull origin main
 git add --all
 git commit -m "${commit}"
