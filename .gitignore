@@ -16,7 +16,7 @@ main.cpp
 # my tmp file
 # tmp.txt
 # my tmp dir
-tmp/
+# tmp/
 
 # struct of project file
 project_struct/
