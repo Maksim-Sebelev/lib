@@ -30,6 +30,7 @@ fi
 
 bash bash/assets/struct.bash || exit 1
 
+git rm -r --cached .
 git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached # remove .gitignore files, if they on git
 git pull origin main
 git add --all
