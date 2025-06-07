@@ -4,7 +4,9 @@ mkdir -p project_struct/
 
 if [ "$#" -eq 0 ]; then
     tree --gitignore > project_struct/project_struct.txt 
-    tree > project_struct/all_project_struct.txt
+    tree > project_struct/without_gitignore_project_struct.txt
+    tree -a > project_struct/all_project_struct.txt
+
 
 elif [ "$#" -eq 1 ]; then
 

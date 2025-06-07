@@ -12,6 +12,20 @@
 │   │   └── create_bash_functions.bash
 │   └── iwyu
 │       └── iwyu.bash
+├── bin
+│   ├── main.d
+│   ├── main.o
+│   └── src
+│       ├── fileread
+│       │   ├── fileread.d
+│       │   └── fileread.o
+│       ├── lib
+│       │   ├── lib.d
+│       │   └── lib.o
+│       └── logger
+│           └── log.d
+├── build
+│   └── lib
 ├── include
 │   ├── fileread
 │   │   └── fileread.hpp
@@ -43,4 +57,4 @@
     ├── test1.txt
     └── test2.txt
 
-19 directories, 25 files
+25 directories, 33 files
