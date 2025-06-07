@@ -1,0 +1,59 @@
+.
+├── bash
+│   ├── assets
+│   │   └── struct.bash
+│   ├── cmake
+│   │   └── cmake.bash
+│   ├── git
+│   │   ├── commit.bash
+│   │   └── copy.bash
+│   ├── global_bash
+│   │   ├── bash_cd.bash
+│   │   └── create_bash_functions.bash
+│   └── iwyu
+│       └── iwyu.bash
+├── bin
+│   ├── main.d
+│   ├── main.o
+│   └── src
+│       ├── fileread
+│       │   ├── fileread.d
+│       │   └── fileread.o
+│       ├── lib
+│       │   ├── lib.d
+│       │   └── lib.o
+│       └── logger
+│           └── log.d
+├── build
+│   └── lib
+├── include
+│   ├── fileread
+│   │   └── fileread.hpp
+│   ├── lib
+│   │   └── lib.hpp
+│   └── logger
+│       └── log.hpp
+├── log
+│   └── log.html
+├── main.cpp
+├── Makefile
+├── project_struct
+│   ├── all_project_struct.txt
+│   └── project_struct.txt
+├── src
+│   ├── fileread
+│   │   └── fileread.cpp
+│   ├── lib
+│   │   └── lib.cpp
+│   └── logger
+│       ├── backgrounds
+│       │   ├── anime_tyan_1.webp
+│       │   ├── anime_tyan_2.webp
+│       │   ├── anime_tyan_3.png
+│       │   └── anime_tyan_main.jpg
+│       └── log.cpp
+└── tests
+    ├── test1.txt
+    └── test2.txt
+
+25 directories, 32 files

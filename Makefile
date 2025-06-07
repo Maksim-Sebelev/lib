@@ -48,7 +48,7 @@ CSRC =  main.cpp                 \
 		src/fileread/fileread.cpp  \
 
 ifeq ($(BUILD_TYPE), debug)
-	CSRC += src/log/log.cpp
+	CSRC += src/logger/log.cpp
 endif
 
 COBJ := $(addprefix $(OUT_O_DIR)/,$(CSRC:.cpp=.o))
@@ -96,7 +96,6 @@ clean_dirs:
 
 clean_log:
 	rm -rf log/
-
 
 #===== dependens =======================================
 

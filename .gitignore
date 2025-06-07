@@ -7,17 +7,3 @@ bin/
 # executable file dir
 build/
 
-# log file dir
-Log/
-
-# here main needed only for lib-functions test
-main.cpp
-
-# my tmp file
-# tmp.txt
-# my tmp dir
-tmp/
-
-# struct of project file
-project_struct/
-

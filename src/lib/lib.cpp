@@ -2,9 +2,13 @@
 #include <assert.h>
 #include "lib/lib.hpp"
 
+#ifdef _DEBUG
+#include "logger/log.hpp"
+#endif
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void PrintPlace(const char* file, const int line , const char* func)
+void PrintPlace(const char* file, const int line, const char* func)
 {
     assert(file);
     assert(func);
@@ -13,6 +17,7 @@ void PrintPlace(const char* file, const int line , const char* func)
     printf("in '");
     COLOR_PRINT(GREEN, "%s", func);
     printf("'\n");
+
     return;
 }
 
