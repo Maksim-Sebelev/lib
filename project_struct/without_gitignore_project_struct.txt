@@ -19,11 +19,9 @@
 │       ├── fileread
 │       │   ├── fileread.d
 │       │   └── fileread.o
-│       ├── lib
-│       │   ├── lib.d
-│       │   └── lib.o
-│       └── logger
-│           └── log.d
+│       └── lib
+│           ├── lib.d
+│           └── lib.o
 ├── build
 │   └── lib
 ├── include
@@ -53,8 +51,12 @@
 │       │   ├── anime_tyan_3.png
 │       │   └── anime_tyan_main.jpg
 │       └── log.cpp
-└── tests
-    ├── test1.txt
-    └── test2.txt
+├── tests
+│   ├── test1.txt
+│   ├── test2.txt
+│   ├── test3.txt
+│   └── test4.jpg
+└── tests_result
+    └── test_3.txt
 
-25 directories, 33 files
+25 directories, 35 files

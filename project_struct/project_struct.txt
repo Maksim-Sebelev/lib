@@ -39,8 +39,12 @@
 │       │   ├── anime_tyan_3.png
 │       │   └── anime_tyan_main.jpg
 │       └── log.cpp
-└── tests
-    ├── test1.txt
-    └── test2.txt
+├── tests
+│   ├── test1.txt
+│   ├── test2.txt
+│   ├── test3.txt
+│   └── test4.jpg
+└── tests_result
+    └── test_3.txt
 
-19 directories, 25 files
+20 directories, 28 files

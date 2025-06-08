@@ -20,11 +20,9 @@
 │       ├── fileread
 │       │   ├── fileread.d
 │       │   └── fileread.o
-│       ├── lib
-│       │   ├── lib.d
-│       │   └── lib.o
-│       └── logger
-│           └── log.d
+│       └── lib
+│           ├── lib.d
+│           └── lib.o
 ├── build
 │   └── lib
 ├── .git
@@ -129,6 +127,7 @@
 │   │   ├── 1f
 │   │   │   ├── 3b0604af49af8e5185c754e0490a5bfd5a7894
 │   │   │   ├── 49a861f99e0d413a3471db996de8ff0d8ee132
+│   │   │   ├── c740cc5ff35a6a311629ea4c2b3f584f3debec
 │   │   │   └── d14a204edc30dcca5b95fff3a26d328041fa5c
 │   │   ├── 20
 │   │   │   ├── 9be721bfadb62fd0b11d60035e2dc6fc83bc8e
@@ -218,7 +217,8 @@
 │   │   ├── 41
 │   │   │   ├── 2cda80546a802951ee8e377340d1890b19ac55
 │   │   │   ├── 4d65389742f0535ad0453fdd1d45a67e618def
-│   │   │   └── b62ad995a58344eb59e809bf2cba22dae1d150
+│   │   │   ├── b62ad995a58344eb59e809bf2cba22dae1d150
+│   │   │   └── bd595f5967f268690b5c7659304d26f528c554
 │   │   ├── 43
 │   │   │   ├── 0c24a8e676e19e08165525100ba7f4119da68d
 │   │   │   ├── 164bc7f039ac3a52a990ce782d264cc25224ea
@@ -324,7 +324,8 @@
 │   │   ├── 6b
 │   │   │   └── 7e6c58960f5f25ca08090301281c14be61cc80
 │   │   ├── 6c
-│   │   │   └── 4130108fa3ae056590111e5a3c5ae1301ee360
+│   │   │   ├── 4130108fa3ae056590111e5a3c5ae1301ee360
+│   │   │   └── e6020efce0d862aed160f6d8e3ee618de18979
 │   │   ├── 6d
 │   │   │   └── 41cc23ed4c2500ad235c89212103d1f2bad12a
 │   │   ├── 6e
@@ -454,6 +455,10 @@
 │   │   ├── a0
 │   │   │   ├── 8356f63d210a56c9f1294aaf62735217390705
 │   │   │   └── ec79fcff54be3aba268d3f2844aff87809ac3d
+│   │   ├── a2
+│   │   │   └── ebefd1d37787421666f7471ba89cc91cad08dc
+│   │   ├── a3
+│   │   │   └── 4095c945288119f1409a7ce40d433486912975
 │   │   ├── a4
 │   │   │   ├── 1809e121932ada44a3ea38a5ebb197cab45aee
 │   │   │   ├── 3c744e81469f61e42fa94402f5afa015c9a62b
@@ -540,7 +545,8 @@
 │   │   │   ├── 964cbc0c2d992830b30e750c4ad473b2f1e68d
 │   │   │   └── d0d8c1337adcd0143023979b408b246b52cb53
 │   │   ├── c7
-│   │   │   └── 0dffe489d5717acf7aa9271551200332f3194c
+│   │   │   ├── 0dffe489d5717acf7aa9271551200332f3194c
+│   │   │   └── d940f6eff865f4b8cbc5f56c4a697e9f9a4342
 │   │   ├── c8
 │   │   │   └── ade2786e05df029ef6ad1ea9a1952754d7c35a
 │   │   ├── c9
@@ -563,6 +569,7 @@
 │   │   ├── d2
 │   │   │   └── c1cad809d4666a9a6dfbf5aa1c2e9d71bc1883
 │   │   ├── d3
+│   │   │   ├── d1e84fc9adaef1528b1ec932dcb95dda0521c5
 │   │   │   └── dae7e9d2755188b4597cdaff3e2dcc65fdb794
 │   │   ├── d4
 │   │   │   ├── 836b7b1f6c559eae5dd0174e6fe4f1488238ab
@@ -650,6 +657,8 @@
 │   │   ├── f0
 │   │   │   ├── 4264948a82f1be295041ebadc4340fa9e704d3
 │   │   │   └── 4bd157f9a1fce7555a24b4942d9944041ef902
+│   │   ├── f2
+│   │   │   └── a17598b1067f09f87834e7b45fe28e23b39a6e
 │   │   ├── f4
 │   │   │   ├── 4a613901a7353f6a63e46789196e8143baf4fa
 │   │   │   └── efe9d7ececc3f5978858c8b0cfdc1a0c32a260
@@ -671,7 +680,8 @@
 │   │   │   ├── 01ce31ab5a4613de352df63121a3d8d0fab11b
 │   │   │   ├── 469943e96e19effda5510e26d0c20a13f7b058
 │   │   │   ├── 5b6a007b8b359fc47a34a805f97cb67f3ed13e
-│   │   │   └── acec76ad85500ebaa8268897bcb5529d2f6549
+│   │   │   ├── acec76ad85500ebaa8268897bcb5529d2f6549
+│   │   │   └── f07ba7f53781a72c8c1532fddb883bfa6feb0b
 │   │   ├── fb
 │   │   │   ├── 06a035862450642c79c853ceabe3457c279e78
 │   │   │   └── 79b8839c13d3280eeeeec0db57861aeaf463f3
@@ -720,10 +730,14 @@
 │       └── log.cpp
 ├── tests
 │   ├── test1.txt
-│   └── test2.txt
+│   ├── test2.txt
+│   ├── test3.txt
+│   └── test4.jpg
+├── tests_result
+│   └── test_3.txt
 └── .vscode
     ├── c_cpp_properties.json
     ├── launch.json
     └── settings.json
 
-250 directories, 477 files
+253 directories, 488 files
