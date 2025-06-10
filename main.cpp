@@ -4,6 +4,12 @@
 #include "lib/lib.hpp"
 #include "fileread/fileread.hpp"
 
+#ifdef _WCHAR
+    #define SPECIFIER "%ls"
+#else
+    #define SPECIFIER "%s"
+#endif
+
 #include <locale.h>
 
 #ifdef _DEBUG
@@ -16,7 +22,6 @@ static void after_test();
 
 int main()
 {
-
     if (!setlocale(LC_ALL, "C.UTF-8"))
         EXIT(EXIT_FAILURE, "failed setlocale.\n");
 
@@ -30,10 +35,10 @@ int main()
     const char* file3 = "tests/test3.txt";
     const char* file4 = "tests/test4.jpg";
 
-    // test_run(file1, 1, true);
-    // test_run(file2, 2, false);
+    test_run(file1, 1, true);
+    test_run(file2, 2, false);
     test_run(file3, 3, false);
-    // test_run(file4, 4, false);
+    test_run(file4, 4, false);
 
     ON_DEBUG(
     LOG_CLOSE();
@@ -47,6 +52,8 @@ int main()
 
 static void test_run(const char* test_file, size_t test_num, bool check_double)
 {
+    assert(test_file);
+
     WordArray words = ReadBufferFromFile(test_file);
 
     COLOR_PRINT(GREEN, "running test %lu\n", test_num);
@@ -84,7 +91,7 @@ static void test_run(const char* test_file, size_t test_num, bool check_double)
         if (check_double)
             LOG_PRINT(Green, "\tdouble word = '%f'\n\tlen = %lu\n\t%s:%lu:%lu\n", WordToDouble(&word), word.len, test_file, word.line, word.inLine);
         else
-            LOG_PRINT(Green, "\tword = '%s'\n\tlen = %lu\n\t%s:%lu:%lu\n", word.word, word.len, test_file, word.line, word.inLine);
+            LOG_PRINT(Green, "\tword = '"SPECIFIER"'\n\tlen = %lu\n\t%s:%lu:%lu\n", word.word, word.len, test_file, word.line, word.inLine);
     
         LOG_PRINT(Yellow, "}\n\n");
         )
@@ -96,7 +103,7 @@ static void test_run(const char* test_file, size_t test_num, bool check_double)
         if (check_double)
             fprintf(test_result, "\tdouble word = '%f'\n\tlen = %lu\n\t%s:%lu:%lu\n", WordToDouble(&word), word.len, test_file, word.line, word.inLine);
         else
-            fprintf(test_result, "\tword = '%ls'\n\tlen = %lu\n\t%s:%lu:%lu\n", word.word, word.len, test_file, word.line, word.inLine);
+            fprintf(test_result, "\tword = '"SPECIFIER"'\n\tlen = %lu\n\t%s:%lu:%lu\n", word.word, word.len, test_file, word.line, word.inLine);
             
         fprintf(test_result, "}\n\n");
         )

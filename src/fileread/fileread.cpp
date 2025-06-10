@@ -201,7 +201,7 @@ static size_t GetBufferLenAndBufferAndWordsArray(const char* file, char_t** buff
     size_t buffer_len      = CalcFileLen(file);
     size_t real_buffer_len = buffer_len + 2;
 
-    *buffer       = (char_t*) calloc (real_buffer_len, sizeof(*buffer     ));
+    *buffer       = (char*)   calloc (real_buffer_len, sizeof(*buffer     ));
     *words_array  = (Word*)   calloc (real_buffer_len, sizeof(*words_array));
 
     if (!(*buffer))
@@ -210,8 +210,8 @@ static size_t GetBufferLenAndBufferAndWordsArray(const char* file, char_t** buff
     if(!(*words_array))
         EXIT(EXIT_FAILURE, "failed allocate memory, to parse '%s'\n", file);
 
-    // if (buffer_len != fread(buffer, sizeof(char_t), buffer_len, file_ptr))
-        // EXIT(EXIT_FAILURE, "failed read '%s'\n", file);
+    if (buffer_len != fread(buffer, sizeof(char_t), buffer_len, file_ptr));
+        EXIT(EXIT_FAILURE, "failed read '%s'\n", file);
 
     if (fclose(file_ptr) != 0)
         EXIT(EXIT_FAILURE, "failed close '%s'\n", file);
@@ -222,6 +222,14 @@ static size_t GetBufferLenAndBufferAndWordsArray(const char* file, char_t** buff
     return real_buffer_len;
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ON_WCHAR(
+wchar_t* GetWcharBuffer(char* buffer)
+{
+
+}
+)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 static Pointer PointersCtor()
